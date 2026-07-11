@@ -210,17 +210,17 @@ with st.container(border=True):
     with tab2:
         st.write("Dynamic Excel workbook for stress-testing macroeconomic variables to evaluate resulting yields and portfolio values for London and regional CRE.")
         try:
-            with open("Project 2 Dashboard.xlsx", "rb") as f:
+            with open("Dashboard.xlsx", "rb") as f:
                 dashboard_bytes = f.read()
             st.download_button(
                 label="Download Valuation Stress-Test Model (Excel)",
                 data=dashboard_bytes,
-                file_name="Project 2 Dashboard.xlsx",
+                file_name="Dashboard.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 key="dl_dashboard"
             )
         except FileNotFoundError:
-            st.warning("Connect your uploaded `Project 2 Dashboard.xlsx` to activate download link.")
+            st.warning("Connect your uploaded `Dashboard.xlsx` to activate download link.")
 
 st.markdown("---")
 st.write("Thank you for reviewing my project.")
