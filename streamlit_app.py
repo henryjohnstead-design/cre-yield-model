@@ -41,25 +41,25 @@ html = """
     }
     .hex {
         position: relative;
-        width: 178px;
-        height: 176px;
+        width: 200px;
+        height: 198px;
         clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0% 50%);
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         text-align: center;
-        padding: 14px 20px;
+        padding: 12px 18px;
         color: #ffffff;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
     .hex-1 { background: linear-gradient(160deg, #1f2a44, #33456e); }
     .hex-2 { background: linear-gradient(160deg, #7a1f2b, #b23a2f); }
     .hex-3 { background: linear-gradient(160deg, #1e4d3a, #2f7d57); }
-    .hex-4 { background: linear-gradient(160deg, #3d3560, #6a4c93); width: 210px; }
+    .hex-4 { background: linear-gradient(160deg, #3d3560, #6a4c93); }
 
     .hex-label {
-        font-size: 0.62rem;
+        font-size: 0.64rem;
         text-transform: uppercase;
         letter-spacing: 0.06em;
         opacity: 0.85;
@@ -67,7 +67,7 @@ html = """
         font-weight: 600;
     }
     .hex-stat {
-        font-size: 1.55rem;
+        font-size: 1.65rem;
         font-weight: 800;
         line-height: 1.05;
     }
@@ -87,17 +87,17 @@ html = """
         <div class="hex hex-1">
             <div class="hex-label">Data Coverage</div>
             <div class="hex-stat">10 Years</div>
-            <div class="hex-substat">21 bi-annual steps (2016–2026)<br>integrating ONS, BoE &<br>Savills datasets.</div>
+            <div class="hex-substat">21 bi-annual steps (2016–2026)<br>integrating ONS, BoE &<br>Savills datasets</div>
         </div>
         <div class="hex hex-2">
             <div class="hex-label">Model Explanatory Power</div>
             <div class="hex-stat">78.6%</div>
-            <div class="hex-substat">Of regional office yield variance<br>explained by macro variables<br>(vs. 46.2% for London).</div>
+            <div class="hex-substat">Of regional office yield variance<br>explained by macro variables<br>(vs. 46.2% for London)</div>
         </div>
         <div class="hex hex-3">
             <div class="hex-label">BOE Rate Sensitivity</div>
             <div class="hex-stat">+41.5 bps</div>
-            <div class="hex-substat">Implied regional yield expansion<br>per 1.0% increase in BoE<br>base rate (p < 0.01).</div>
+            <div class="hex-substat">Implied regional yield expansion<br>per 1.0% increase in BoE<br>base rate (p < 0.01)</div>
         </div>
         <div class="hex hex-4 hex-multiline">
             <div class="hex-label">Maximum Yield Shock</div>
@@ -105,7 +105,7 @@ html = """
             <div class="hex-substat">
                 <div>Historic regional yield surge</div>
                 <div>(4.75% &rarr; 7.00%) during the</div>
-                <div>2022–2023 inflation spike.</div>
+                <div>2022–2023 inflation spike</div>
             </div>
         </div>
     </div>
@@ -115,21 +115,21 @@ html = """
 
 # Main Title & Subtitle
 st.title("UK Commercial Real Estate Yield Modelling and Valuation Stress-Testing")
-st.markdown("### *An econometric analysis of the impact of CPI inflation, BoE base rate and GDP growth on CRE yields*")
+st.markdown("### *An econometric analysis of macroeconomic impacts on UK CRE yields*")
 st.caption("Developed by Henry Stead")
 st.markdown("---")
 
 # Render Hexagons
-components.html(html, height=195, scrolling=False)
+components.html(html, height=215, scrolling=False)
 
 # Summary Box
 st.info(
-    "**Summary:** This dashboard visually illustrates the end to end workflow for synthesising data, "
-    "programmatically analysing it then writing a report of what we found and making the finding "
-    "accessible through an interactive excel dashboard."
+    "**Summary:** This dashboard visually illustrates an end-to-end workflow for synthesising data, "
+    "programmatically analysing it, and compiling the insights into a report. These findings are "
+    "brought to life through an interactive Excel stress-test model."
 )
 
-st.markdown("## Follow the econometric workflow below:")
+st.markdown("## Explore the econometric workflow:")
 
 ARROW = "<div style='text-align: center; font-size: 20px; color: black; margin: 4px 0;'>↓</div>"
 
@@ -139,7 +139,7 @@ ARROW = "<div style='text-align: center; font-size: 20px; color: black; margin: 
 with st.container(border=True):
     st.markdown("### Phase 1: Data Sourcing")
     st.write(
-        "**Objective:** Pairing historical UK macroeconomic data with commercial property data from Savills’ Market in Minutes."
+        "**Objective:** Pair historical UK macroeconomic data with commercial property data from Savills’ Market in Minutes."
     )
     try:
         with open("CRE+Macro.xlsx", "rb") as f:
@@ -162,7 +162,7 @@ st.markdown(ARROW, unsafe_allow_html=True)
 with st.container(border=True):
     st.markdown("### Phase 2: Regression Analysis")
     st.write(
-        "**Objective:** Produce a multivariate linear regression in R to determine how sensitive London and Regional "
+        "**Objective:** Produce a multivariate linear regression in R to determine how sensitive London and regional "
         "commercial office yields are to changes in key macroeconomic indicators."
     )
     try:
@@ -193,22 +193,22 @@ with st.container(border=True):
     tab1, tab2 = st.tabs(["Econometric Report", "Interactive Valuation Model"])
 
     with tab1:
-        st.write("Detailed 6-page institutional risk and documentation analysis report detailing R model parameters.")
+        st.write("Detailed 6-page econometric report analysing the impact of predictor variables on London and regional CRE yields.")
         try:
-            with open("Regression Analysis Results.docx", "rb") as f:
+            with open("Regression Analysis Results.pdf", "rb") as f:
                 report_bytes = f.read()
             st.download_button(
-                label="Download Econometric Report (Word Doc)",
+                label="Download Econometric Report (PDF)",
                 data=report_bytes,
-                file_name="Regression_Analysis_Results.docx",
-                mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                file_name="Regression_Analysis_Results.pdf",
+                mime="application/pdf",
                 key="dl_report"
             )
         except FileNotFoundError:
-            st.warning("Connect your uploaded `Regression Analysis Results.docx` to activate download link.")
+            st.warning("Connect your uploaded `Regression Analysis Results.pdf` to activate download link.")
 
     with tab2:
-        st.write("Dynamic Excel workbook for stress-testing assets and evaluating actual vs. fitted deviations.")
+        st.write("Dynamic Excel workbook for stress-testing macroeconomic variables to evaluate resulting yields and portfolio values for London and regional CRE.")
         try:
             with open("Project 2 Dashboard.xlsx", "rb") as f:
                 dashboard_bytes = f.read()
