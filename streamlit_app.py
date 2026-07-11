@@ -207,7 +207,7 @@ with st.container(border=True):
         except FileNotFoundError:
             st.warning("Connect your uploaded `Regression Analysis Results.pdf` to activate download link.")
 
-    with tab2:
+with tab2:
         st.write("Dynamic Excel workbook for stress-testing macroeconomic variables to evaluate resulting yields and portfolio values for London and regional CRE.")
         try:
             with open("Dashboard.xlsx", "rb") as f:
